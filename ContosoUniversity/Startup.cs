@@ -31,7 +31,7 @@ namespace ContosoUniversity
             services.AddMiniProfiler().AddEntityFramework();
 
             services.AddDbContext<SchoolContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddAutoMapper(typeof(Startup));
 
