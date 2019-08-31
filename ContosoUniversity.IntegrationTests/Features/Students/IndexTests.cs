@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ContosoUniversity.Pages.Students;
 using ContosoUniversity.Models;
+using ContosoUniversity.Models.Query.Student;
 using Shouldly;
 using Xunit;
 using static ContosoUniversity.IntegrationTests.SliceFixture;
@@ -24,13 +25,13 @@ namespace ContosoUniversity.IntegrationTests.Features.Students
             };
             var student2 = new Student
             {
-                 EnrollmentDate = DateTime.Today,
-                 FirstMidName = "Jane",
-                 LastName = lastName
+                EnrollmentDate = DateTime.Today,
+                FirstMidName = "Jane",
+                LastName = lastName
             };
             await InsertAsync(student1, student2);
 
-            var query = new Index.Query{CurrentFilter = lastName };
+            var query = new StudentQueryModel {CurrentFilter = lastName};
 
             var result = await SendAsync(query);
 
@@ -52,13 +53,13 @@ namespace ContosoUniversity.IntegrationTests.Features.Students
             };
             var student2 = new Student
             {
-                 EnrollmentDate = DateTime.Today,
-                 FirstMidName = "Jane",
-                 LastName = lastName + "aaa"
+                EnrollmentDate = DateTime.Today,
+                FirstMidName = "Jane",
+                LastName = lastName + "aaa"
             };
             await InsertAsync(student1, student2);
 
-            var query = new Index.Query{CurrentFilter = lastName, SortOrder = "name_desc" };
+            var query = new StudentQueryModel {CurrentFilter = lastName, SortOrder = "name_desc"};
 
             var result = await SendAsync(query);
 
